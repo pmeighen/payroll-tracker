@@ -1,10 +1,11 @@
 // Get a reference to the #add-employees-btn element
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
+// Define employeesArray outside of function to maintain its state
+const employeesArray = [];
 
 // Collect employee data
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
-  const employeesArray = [];
   const firstName = prompt("Enter employee's first name:");
   const lastName = prompt("Enter employee's last name");
   const salary = parseFloat(prompt("Enter employee's salary:"));
@@ -27,8 +28,8 @@ const displayAverageSalary = function(employeesArray) {
   for(const employee of employeesArray) {
     totalSalary += employee.salary;
   }
-  const sverageSalary = totalSalary / employeesArray.length;
-  alert('Average Salary: ${averageSalary.toLocalString("en-US", { style: "currency", currency: "USD" })}');
+  const averageSalary = totalSalary / employeesArray.length;
+  alert(`Average Salary: ${averageSalary.toLocaleString("en-US", { style: "currency", currency: "USD" })}`);
 }
 
 // Select a random employee
@@ -36,7 +37,7 @@ const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
 const randomIndex = Math.floor(Math.random() * employeesArray.length);
 const randomEmployee = employeesArray[randomIndex];
-alert('Random Employee: ${randomEmployee.firstName} ${randomEmployee.lastName}');
+alert(`Random Employee: ${randomEmployee.firstName} ${randomEmployee.lastName}`);
 
 }
 
@@ -87,6 +88,9 @@ const trackEmployeeData = function() {
 
   console.table(employees);
 
+  // Display employees in the table before other operations
+  displayEmployees(employees);
+  
   displayAverageSalary(employees);
 
   console.log('==============================');
